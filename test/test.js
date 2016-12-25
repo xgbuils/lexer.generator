@@ -149,7 +149,9 @@ describe('lexer of mathematic expression', function () {
                 type: ')',
                 column: 29
             }, {
-                type: 'end'
+                type: 'end',
+                key: '<<END OF LINE>>',
+                column: 30
             }])
         })
     })
@@ -252,7 +254,9 @@ describe('lexer of set expression', function () {
                 type: 'set',
                 column: 28
             }, {
-                type: 'end'
+                type: 'end',
+                key: '<<END OF LINE>>',
+                column: 31
             }])
         })
     })

@@ -6,9 +6,6 @@ var exec = require('./regexp-utils/exec')
 var toGlobal = require('./regexp-utils/to-global')
 
 function lexerGenerator (string, config) {
-    var endToken = {
-        type: 'end'
-    }
     return Iterum(function () {
         var tokenCalculator = new TokenCalculator(string, config.creators)
         var ignore = toGlobal(config.ignore)
@@ -31,8 +28,16 @@ function lexerGenerator (string, config) {
             }
         }
     })
-    .concat(Value(endToken))
+    .concat(Value(endToken(string.length + 1)))
     .build()()
+}
+
+function endToken (column) {
+    return {
+        type: 'end',
+        key: '<<END OF LINE>>',
+        column: column
+    }
 }
 
 module.exports = lexerGenerator
